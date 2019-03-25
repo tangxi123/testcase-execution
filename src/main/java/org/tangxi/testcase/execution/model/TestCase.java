@@ -15,6 +15,8 @@ public class TestCase {
 
     private List<String> groups;
 
+    private String testName;
+
     private String descs;
 
     private String method;
@@ -36,6 +38,10 @@ public class TestCase {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private String actual;
+
+//    private TestStatus is_passed;
 
     public Long getId() {
         return id;
@@ -67,6 +73,14 @@ public class TestCase {
 
     public void setGroups(List<String> groups) {
         this.groups = groups;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
     }
 
     public String getDescs() {
@@ -155,5 +169,13 @@ public class TestCase {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getActual() {
+        return actual;
+    }
+
+    public void setActual(String actual) {
+        this.actual = actual;
     }
 }
