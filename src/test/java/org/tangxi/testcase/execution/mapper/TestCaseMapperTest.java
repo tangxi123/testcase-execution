@@ -1,19 +1,17 @@
 package org.tangxi.testcase.execution.mapper;
 
 import org.apache.ibatis.session.SqlSession;
-import org.tangxi.testcase.execution.helper.MyBatisHelper;
+import org.tangxi.testcase.execution.helper.SqlSessionFactoryHelper;
 import org.tangxi.testcase.execution.model.TestCase;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
-import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 
 public class TestCaseMapperTest {
     @Test
     public void selectTestCaseById() throws IOException{
-        SqlSession sqlSession = MyBatisHelper.buildSqlSessionFactory().openSession();
+        SqlSession sqlSession = SqlSessionFactoryHelper.buildSqlSessionFactory().openSession();
         Assertion assertion = new Assertion();
         try{
             TestCaseMapper mapper = sqlSession.getMapper(TestCaseMapper.class);
