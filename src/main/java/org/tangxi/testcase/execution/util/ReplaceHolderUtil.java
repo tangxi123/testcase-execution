@@ -1,6 +1,8 @@
 package org.tangxi.testcase.execution.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tangxi.testcase.execution.TestExecution;
@@ -33,7 +35,32 @@ public class ReplaceHolderUtil {
             }
             source = source.replace(match,parseFields);
         }
-
         return source;
+    }
+
+
+    private static String parseField(String str){
+        String regex = str.substring(str.indexOf("{")+1,str.indexOf("}"));
+        if(str.startsWith("${pre.")){
+            return preFieldsValuesJson.getString(regex);
+        }
+        return replaceValue(regex);
+    }
+
+    private static String replaceValue(String value){
+        SqlSessionFactory sqlSessionFactory = createDataSourceConnection();
+        SqlSession session = sqlSessionFactory.openSession();
+        try{
+            ParamMapper paramMapper = session.getMapper(ParamMapper.class);
+            ParameterWrapper parameterWrapper = paramMapper.selectParameterWrapperByName(value);
+            String paramSqlStr = JacksonUtil.toJson(parameterWrapper.getValue());
+            SqlParameter sqlParameter = JacksonUtil.fromJson(paramSqlStr,SqlParameter.class);
+            //连接数据库源执行sql语句，返回查询到得实际参数值
+            String actualValue = getSqlParameterValue(sqlParameter);
+            return actualValue;
+
+        }finally {
+            session.close();
+        }
     }
 }

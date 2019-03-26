@@ -15,24 +15,31 @@ public class TestExecution {
     private final static Logger LOG = LoggerFactory.getLogger(TestExecution.class);
 
     private static TestCase testCase;
+    private static String parameters;
     private static List<String> preActions;
     private static JsonPath requestResults;
     private static List<String> postActions;
-    public static void execTestCaseById(Long id){
+
+    public static void execTestCaseById(Long id) {
         initTestData(id);
         PrePostActionExecution.execActions(preActions);
     }
 
-    private static void initTestData(Long id){
+    private static void initTestData(Long id) {
         SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
-        try{
+        try {
             TestCaseMapper testCaseMapper = sqlSession.getMapper(TestCaseMapper.class);
             testCase = testCaseMapper.selectTestCaseById(id);
+            parameters = testCase.getParameters();
             preActions = testCase.getPreActions();
             postActions = testCase.getPostActions();
-            LOG.debug("testCase:{}"+"\\r"+"preActions:{}"+"\\r"+"postActions:{}",testCase,preActions,postActions);
-        }catch (Exception e){
-            LOG.error(e.getMessage(),e);
+            LOG.debug("testCase:{}" + "\\r"
+                            + "parameters:{}" + "\\r"
+                            + "preActions:{}" + "\\r"
+                            + "postActions:{}",
+                    testCase, parameters,preActions, postActions);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
