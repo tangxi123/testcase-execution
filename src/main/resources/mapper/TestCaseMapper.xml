@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.tangxi.testcase.execution.mapper.TestCaseMapper">
-    <select id="selectTestCaseById" resultType="org.tangxi.testcase.execution.model.TestCase" parameterType="Long">
+    <resultMap id="testCaseMap" type="org.tangxi.testcase.execution.model.TestCase">
+        <result column="groups" property="groups" jdbcType="VARCHAR" javaType="java.util.List" typeHandler="org.tangxi.testcase.execution.handler.GenericTypeHandler"></result>
+        <result column="pre_action_names" property="preActions" jdbcType="VARCHAR" javaType="java.util.List" typeHandler="org.tangxi.testcase.execution.handler.GenericTypeHandler"></result>
+        <result column="check_points" property="checkPoints" jdbcType="VARCHAR" javaType="java.util.List" typeHandler="org.tangxi.testcase.execution.handler.GenericTypeHandler"></result>
+        <result column="post_action_names" property="postActions" jdbcType="VARCHAR" javaType="java.util.List" typeHandler="org.tangxi.testcase.execution.handler.GenericTypeHandler"></result>
+    </resultMap>
+    <select id="selectTestCaseById" resultType="org.tangxi.testcase.execution.model.TestCase" parameterType="Long" resultMap="testCaseMap">
         SELECT * FROM zsi_test_case WHERE id = #{id}
     </select>
 </mapper>

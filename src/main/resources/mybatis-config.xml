@@ -19,5 +19,6 @@
     </environments>
     <mappers>
         <mapper resource="mapper/TestCaseMapper.xml"/>
+        <mapper resource="mapper/PrePostMapper.xml"/>
     </mappers>
 </configuration>

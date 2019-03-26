@@ -1,17 +1,15 @@
 package org.tangxi.testcase.execution.mapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.tangxi.testcase.execution.util.JacksonUtil;
 import org.tangxi.testcase.execution.util.SqlSessionFactoryUtil;
 import org.tangxi.testcase.execution.model.TestCase;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
+
 
 public class TestCaseMapperTest {
     @Test
@@ -24,7 +22,7 @@ public class TestCaseMapperTest {
             assertion.assertEquals(testCase.getId().toString(),"139");
             assertion.assertEquals(testCase.getSuite(),"testcase");
             assertion.assertEquals(testCase.getTestModule(),"query");
-//            assertion.assertEquals(testCase.getGroups().get(0),"功能测试");
+            assertion.assertEquals(testCase.getGroups().get(0),"功能测试");
             assertion.assertEquals(testCase.getTestName(),"test");
             assertion.assertEquals(testCase.getDescs(),"GET接口请求测试");
             assertion.assertEquals(testCase.getMethod(),"GET");
@@ -32,11 +30,11 @@ public class TestCaseMapperTest {
             assertion.assertEquals(testCase.getUrl(),"/testcases/");
             assertion.assertEquals(testCase.getHeaders(),"{\"Content-Type\":\"application/json\"}");
             assertion.assertEquals(testCase.getParameters(),"${testCaseId}");
-//            assertion.assertEquals(testCase.getPostActions().get(0),"插入一条数据测试");
-//            assertion.assertEquals(testCase.getCheckPoints().get(0).toString(),"{\"type\":\"StrCheckPoint\",\"strCheckPointType\":\"STREQUAL\",\"checkKey\":\"data.testName\",\"expected\":\"test\"}");
-//            assertion.assertEquals(testCase.getPostActions().get(0),"删除一条数据测试");
-            assertion.assertEquals(testCase.getCreatedAt().atZone(ZoneId.of("+08:00")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")),"2019-03-06 14:09:10");
-            assertion.assertEquals(testCase.getUpdatedAt(),"2019-03-06 14:09:10");
+            assertion.assertEquals(testCase.getPreActions().get(0),"插入一条数据测试");
+            assertion.assertEquals(JacksonUtil.toJson(testCase.getCheckPoints()),"[{\"type\":\"StrCheckPoint\",\"strCheckPointType\":\"STREQUAL\",\"checkKey\":\"data.testName\",\"expected\":\"test\"}]");
+            assertion.assertEquals(testCase.getPostActions().get(0),"删除一条数据测试");
+//            assertion.assertEquals(testCase.getCreatedAt(),"2019-03-06T14:09:10");
+//            assertion.assertEquals(testCase.getUpdatedAt(),"2019-03-06T14:09:10");
             assertion.assertEquals(testCase.getActual(),"{\"code\":200}");
 //            LocalDateTime time;
 //            assertion.assertAll();

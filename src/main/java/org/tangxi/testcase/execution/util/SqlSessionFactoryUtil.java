@@ -14,7 +14,7 @@ public class SqlSessionFactoryUtil {
 
     private static SqlSessionFactory sqlSessionFactory;
     private SqlSessionFactoryUtil(){}
-    public static synchronized SqlSessionFactory initSqlSessionFactory() throws IOException{
+    public static synchronized SqlSessionFactory initSqlSessionFactory() {
         if(sqlSessionFactory == null) {
             String resource = "mybatis-config.xml";
             try {
@@ -24,7 +24,6 @@ public class SqlSessionFactoryUtil {
                 return sqlSessionFactory;
             } catch (IOException e) {
                 LOG.error(e.getMessage(), e);
-                throw e;
             }
         }
         return sqlSessionFactory;
