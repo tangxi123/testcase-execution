@@ -28,39 +28,39 @@ public class ReplaceHolderUtil {
         Pattern compile = Pattern.compile(pattern);
         Matcher matcher = compile.matcher(source);
         while (matcher.find()) {
-            String match = matcher.group();
-            String parseFields = parseField(match);
-            if(parseFields == null){
-                return source;
-            }
-            source = source.replace(match,parseFields);
+//            String match = matcher.group();
+//            String parseFields = parseField(match);
+//            if(parseFields == null){
+//                return source;
+//            }
+//            source = source.replace(match,parseFields);
         }
         return source;
     }
 
 
-    private static String parseField(String str){
-        String regex = str.substring(str.indexOf("{")+1,str.indexOf("}"));
-        if(str.startsWith("${pre.")){
-            return preFieldsValuesJson.getString(regex);
-        }
-        return replaceValue(regex);
-    }
-
-    private static String replaceValue(String value){
-        SqlSessionFactory sqlSessionFactory = createDataSourceConnection();
-        SqlSession session = sqlSessionFactory.openSession();
-        try{
-            ParamMapper paramMapper = session.getMapper(ParamMapper.class);
-            ParameterWrapper parameterWrapper = paramMapper.selectParameterWrapperByName(value);
-            String paramSqlStr = JacksonUtil.toJson(parameterWrapper.getValue());
-            SqlParameter sqlParameter = JacksonUtil.fromJson(paramSqlStr,SqlParameter.class);
-            //连接数据库源执行sql语句，返回查询到得实际参数值
-            String actualValue = getSqlParameterValue(sqlParameter);
-            return actualValue;
-
-        }finally {
-            session.close();
-        }
-    }
+//    private static String parseField(String str){
+//        String regex = str.substring(str.indexOf("{")+1,str.indexOf("}"));
+//        if(str.startsWith("${pre.")){
+//            return preFieldsValuesJson.getString(regex);
+//        }
+//        return replaceValue(regex);
+//    }
+//
+//    private static String replaceValue(String value){
+//        SqlSessionFactory sqlSessionFactory = createDataSourceConnection();
+//        SqlSession session = sqlSessionFactory.openSession();
+//        try{
+//            ParamMapper paramMapper = session.getMapper(ParamMapper.class);
+//            ParameterWrapper parameterWrapper = paramMapper.selectParameterWrapperByName(value);
+//            String paramSqlStr = JacksonUtil.toJson(parameterWrapper.getValue());
+//            SqlParameter sqlParameter = JacksonUtil.fromJson(paramSqlStr,SqlParameter.class);
+//            //连接数据库源执行sql语句，返回查询到得实际参数值
+//            String actualValue = getSqlParameterValue(sqlParameter);
+//            return actualValue;
+//
+//        }finally {
+//            session.close();
+//        }
+//    }
 }

@@ -44,7 +44,7 @@ public class PrePostActionExecution {
             }
         }catch (Exception e){
             LOG.error(e.getMessage(),e);
-            throw e;
+//            throw e;
         }finally {
             sqlSession.close();
         }

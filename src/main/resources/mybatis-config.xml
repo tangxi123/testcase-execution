@@ -20,5 +20,6 @@
     <mappers>
         <mapper resource="mapper/TestCaseMapper.xml"/>
         <mapper resource="mapper/PrePostMapper.xml"/>
+        <mapper resource="mapper/ParameterMapper.xml"/>
     </mappers>
 </configuration>
