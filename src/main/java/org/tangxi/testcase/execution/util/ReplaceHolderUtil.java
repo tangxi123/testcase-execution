@@ -47,31 +47,8 @@ public class ReplaceHolderUtil {
 //        if(match.startsWith("${pre.")){
 //            return preFieldsValuesJson.getString(regex);
 //        }
-        return replaceParameter(regex);
+        return ParameterExecution.replaceParameter(regex);
     }
 
-    private static String replaceParameter(String value) {
-        SqlSession session = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
-        try {
-            ParameterMapper paramMapper = session.getMapper(ParameterMapper.class);
-            ParameterWrapper parameterWrapper = paramMapper.selectParameterWrapperByName(value);
-            ParameterType paramType = parameterWrapper.getType();
-            String actualValue = null;
-            switch (paramType) {
-                case SQL:
-                    String paramSqlStr = JacksonUtil.toJson(parameterWrapper.getParameter());
-                    ParameterSql parameterSql = JacksonUtil.fromJson(paramSqlStr, ParameterSql.class);
-                    System.out.println("#####################################" + parameterSql.getSql());
-                    //连接数据库源执行sql语句，返回查询到得实际参数值
-                    actualValue = ParameterExecution.getSqlParameterValue(parameterSql);
-                    break;
-            }
 
-
-            return actualValue;
-
-        } finally {
-            session.close();
-        }
-    }
 }
