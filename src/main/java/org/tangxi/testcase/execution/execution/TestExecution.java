@@ -38,7 +38,7 @@ public class TestExecution {
                             + "preActions:{}" + "\\r"
                             + "postActions:{}",
                     testCase, parameters, preActions, postActions);
-            parameters = ReplaceHolderUtil.replacePlaceHolder(parameters);
+//            parameters = ReplaceHolderUtil.replacePlaceHolder(parameters);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }

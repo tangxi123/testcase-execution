@@ -26,18 +26,22 @@
     <select id="selectPrePostActionWrapperByName" resultMap="prePostActionWrapperResult">
         SELECT
         zw.id as prepostaction_wrapper_id,
-        zw.name as name,
+        zw.`name` as `name`,
         zw.descs as descs,
         zw.action_type as action_type,
-        zpts.id as prepostaction_sql_id,
-        zpts.host as host,
-        zpts.port as port,
-        zpts.`database` as `database`,
-        zpts.user as user,
-        zpts.password as password,
-        zpts.`sql` as `sql`,
-        zpts.action_id as action_id
-        FROM zsi_prepostaction zw LEFT JOIN zsi_prepostaction_type_sql zpts ON zw.id = zpts.action_id
+        zptsq.id as prepostaction_sql_id,
+        zptsq.host as host,
+        zptsq.port as port,
+        zptsq.`database` as `database`,
+        zptsq.`user` as `user`,
+        zptsq.password as password,
+        zptsq.`sql` as `sql`,
+        zptsq.action_id as action_id
+        FROM zsi_prepostaction zw LEFT JOIN zsi_prepostaction_type_sql zptsq ON zw.id = zptsq.action_id
         WHERE zw.name = #{name}
+    </select>
+
+    <select id="selectName" resultType="org.tangxi.testcase.execution.model.prePostAction.PrePostActionWrapper">
+        SELECT * FROM zsi_prepostaction;
     </select>
 </mapper>

@@ -4,4 +4,5 @@ import org.tangxi.testcase.execution.model.prePostAction.PrePostActionWrapper;
 
 public interface PrePostMapper {
     PrePostActionWrapper selectPrePostActionWrapperByName(String name);
+    PrePostActionWrapper selectName();
 }

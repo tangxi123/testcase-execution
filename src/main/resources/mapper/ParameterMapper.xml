@@ -25,19 +25,19 @@
     <select id="selectParameterWrapperByName" resultMap="parameterWrapperResult">
         SELECT
           zp.id as parameter_wrapper_id,
-          zp.name as `name`,
+          zp.`name` as `name`,
           zp.descs as descs,
           zp.type as `type`,
           zpts.id as parameter_sql_id,
           zpts.host as host,
           zpts.port as port,
-          zpts.database as `database`,
-          zpts.user as `user`,
+          zpts.`database` as `database`,
+          zpts.`user` as `user`,
           zpts.password as password,
-          zpts.sql as `sql`,
+          zpts.`sql` as `sql`,
           zpts.param as param,
           zpts.param_id as param_id
         FROM zsi_parameter zp LEFT JOIN zsi_parameter_type_sql zpts ON zp.id = zpts.param_id
-        WHERE zp.name = #{name}
+        WHERE zp.`name` = #{name}
     </select>
 </mapper>
