@@ -1,12 +1,12 @@
-package org.tangxi.testcase.execution;
+package org.tangxi.testcase.execution.execution;
 
 import com.jayway.restassured.path.json.JsonPath;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tangxi.testcase.execution.mapper.TestCaseMapper;
 import org.tangxi.testcase.execution.model.TestCase;
+import org.tangxi.testcase.execution.util.ReplaceHolderUtil;
 import org.tangxi.testcase.execution.util.SqlSessionFactoryUtil;
 
 import java.util.List;
@@ -37,7 +37,8 @@ public class TestExecution {
                             + "parameters:{}" + "\\r"
                             + "preActions:{}" + "\\r"
                             + "postActions:{}",
-                    testCase, parameters,preActions, postActions);
+                    testCase, parameters, preActions, postActions);
+            parameters = ReplaceHolderUtil.replacePlaceHolder(parameters);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
