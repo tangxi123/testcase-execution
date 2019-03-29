@@ -9,11 +9,14 @@ import org.tangxi.testcase.execution.model.TestCase;
 import org.tangxi.testcase.execution.util.ReplaceHolderUtil;
 import org.tangxi.testcase.execution.util.SqlSessionFactoryUtil;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TestExecution {
     private final static Logger LOG = LoggerFactory.getLogger(TestExecution.class);
 
+    private static Map<String,Object> preActionResult = new HashMap<>();
     private static TestCase testCase;
     private static String parameters;
     private static List<String> preActions;
@@ -22,7 +25,9 @@ public class TestExecution {
 
     public static void execTestCaseById(Long id) {
         initTestData(id);
-        PrePostActionExecution.execActions(preActions);
+        PrePostActionExecution.execActions(preActions,preActionResult);
+        LOG.debug("preActionResult的值为：{}",preActionResult);
+        RequestExecution.sendRequest(testCase,preActionResult);
     }
 
     private static void initTestData(Long id) {
@@ -38,7 +43,6 @@ public class TestExecution {
                             + "preActions:{}" + "\\r"
                             + "postActions:{}",
                     testCase, parameters, preActions, postActions);
-//            parameters = ReplaceHolderUtil.replacePlaceHolder(parameters);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }

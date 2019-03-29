@@ -10,6 +10,7 @@ import org.tangxi.testcase.execution.model.parameter.ParameterSql;
 import org.tangxi.testcase.execution.model.parameter.ParameterType;
 import org.tangxi.testcase.execution.model.parameter.ParameterWrapper;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,11 +20,11 @@ import java.util.regex.Pattern;
 public class ReplaceHolderUtil {
     private final static Logger LOG = LoggerFactory.getLogger(ReplaceHolderUtil.class);
 
-    public static String replacePlaceHolder(String source) {
-        return replacePlaceHolder(source, "\\$\\{.*?}");
+    public static String replacePlaceHolder(String source,Map<String,Object> preActionResult) {
+        return replacePlaceHolder(source, "\\$\\{.*?}",preActionResult);
     }
 
-    private static String replacePlaceHolder(String source, String pattern) {
+    private static String replacePlaceHolder(String source, String pattern, Map<String,Object> preActionResult) {
         LOG.debug("需要替换的语句为：{},替换的正则表达式为：{}", source, pattern);
         if (StringUtils.isBlank(source) || pattern == null) {
             return null;
@@ -32,7 +33,7 @@ public class ReplaceHolderUtil {
         Matcher matcher = compile.matcher(source);
         while (matcher.find()) {
             String match = matcher.group();
-            String parseFields = replaceMatch(match);
+            String parseFields = replaceMatch(match,preActionResult);
             if (parseFields == null) {
                 return source;
             }
@@ -42,11 +43,11 @@ public class ReplaceHolderUtil {
     }
 
 
-    private static String replaceMatch(String match) {
+    private static String replaceMatch(String match,Map<String,Object> preActionResult) {
         String regex = match.substring(match.indexOf("{") + 1, match.indexOf("}"));
-//        if(match.startsWith("${pre.")){
-//            return preFieldsValuesJson.getString(regex);
-//        }
+        if(match.startsWith("${pre.")){
+            return (String)preActionResult.get(regex);
+        }
         return ParameterExecution.replaceParameter(regex);
     }
 
