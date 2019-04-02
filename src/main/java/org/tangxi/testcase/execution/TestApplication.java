@@ -14,6 +14,6 @@ public class TestApplication {
     @Test
     public void test(Long id){
         LOG.debug("开始调用测试程序");
-        TestExecution.execTestCaseById(id);
+//        TestExecution.execTestCaseById(id);
     }
 }

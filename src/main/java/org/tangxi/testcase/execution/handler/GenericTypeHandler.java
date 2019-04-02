@@ -1,6 +1,7 @@
 package org.tangxi.testcase.execution.handler;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.tangxi.testcase.execution.util.JacksonUtil;

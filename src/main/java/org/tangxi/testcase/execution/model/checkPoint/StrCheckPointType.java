@@ -10,7 +10,7 @@ package org.tangxi.testcase.execution.model.checkPoint;
  * @author Tangx
  * 2019-02-13 15:02
  */
-public enum StrCheckPointType {
+public enum StrCheckPointType implements CheckPointType{
     STREQUAL("==","等于"),
     STRNOTEQUAL("!=","不等于"),
     STRINCLUDE("in","包含"),

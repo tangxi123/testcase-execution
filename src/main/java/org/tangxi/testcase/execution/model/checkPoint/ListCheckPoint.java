@@ -3,17 +3,21 @@ package org.tangxi.testcase.execution.model.checkPoint;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/***
- * 字符串类型检查类
- */
-@JsonTypeName("StrCheckPoint")
-public class StrCheckPoint implements CheckPoint {
+@JsonTypeName("ListCheckPoint")
+public class ListCheckPoint implements CheckPoint {
+    //将要验证的类型
     private String type;
-    private StrCheckPointType strCheckPointType;
+
+    //数值验证类型
+    private ListCheckPointType listCheckPointType;
+
+    //验证key
     private String checkKey;
+
+    //期望值
     private String expected;
 
-
+    @Override
     public String getType() {
         return type;
     }
@@ -22,20 +26,15 @@ public class StrCheckPoint implements CheckPoint {
         this.type = type;
     }
 
-    public StrCheckPointType getStrCheckPointType() {
-        return strCheckPointType;
+    public ListCheckPointType getListCheckPointType() {
+        return listCheckPointType;
     }
 
-    public void setStrCheckPointType(StrCheckPointType strCheckPointType) {
-        this.strCheckPointType = strCheckPointType;
+    public void setListCheckPointType(ListCheckPointType listCheckPointType) {
+        this.listCheckPointType = listCheckPointType;
     }
 
-
-    public CheckPointType getCheckPointType() {
-        return strCheckPointType;
-    }
-
-
+    @Override
     public String getCheckKey() {
         return checkKey;
     }
@@ -44,7 +43,7 @@ public class StrCheckPoint implements CheckPoint {
         this.checkKey = checkKey;
     }
 
-
+    @Override
     public String getExpected() {
         return expected;
     }
@@ -52,4 +51,12 @@ public class StrCheckPoint implements CheckPoint {
     public void setExpected(String expected) {
         this.expected = expected;
     }
+
+    @JsonIgnore
+    @Override
+    public CheckPointType getCheckPointType() {
+        return listCheckPointType;
+    }
+
+
 }
