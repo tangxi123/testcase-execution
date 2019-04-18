@@ -12,8 +12,8 @@ public class TestApplication {
     private final static Logger LOG = LoggerFactory.getLogger(TestApplication.class);
 
     @Test
-    public void test(Long id){
+    public void test(){
         LOG.debug("开始调用测试程序");
-//        TestExecution.execTestCaseById(id);
+        new TestExecution(139L).execTestCase();
     }
 }
