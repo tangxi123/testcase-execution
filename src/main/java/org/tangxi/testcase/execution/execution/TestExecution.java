@@ -32,11 +32,11 @@ public class TestExecution {
         LOG.debug("preActionResult的值为：{}", preActionResult);
     }
 
-    public TestExecution(Long id) {
+    public TestExecution(int id) {
         initTestData(id);
     }
 
-    private void initTestData(Long id) {
+    private void initTestData(int id) {
         SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
         try {
             TestCaseMapper testCaseMapper = sqlSession.getMapper(TestCaseMapper.class);
@@ -58,7 +58,7 @@ public class TestExecution {
 
 
     public static void main(String[] args) {
-        new TestExecution(139L).execTestCase();
+        new TestExecution(139).execTestCase();
 
     }
 }
