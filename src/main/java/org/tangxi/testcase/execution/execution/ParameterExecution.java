@@ -3,7 +3,7 @@ package org.tangxi.testcase.execution.execution;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tangxi.testcase.execution.mapper.ParameterMapper;
+import org.tangxi.testcase.execution.mapper.PMapper;
 import org.tangxi.testcase.execution.model.parameter.ParameterSql;
 import org.tangxi.testcase.execution.model.parameter.ParameterType;
 import org.tangxi.testcase.execution.model.parameter.ParameterWrapper;
@@ -22,7 +22,7 @@ public class ParameterExecution {
     public static String replaceParameter(String value) {
         SqlSession session = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
         try {
-            ParameterMapper paramMapper = session.getMapper(ParameterMapper.class);
+            PMapper paramMapper = session.getMapper(PMapper.class);
             ParameterWrapper parameterWrapper = paramMapper.selectParameterWrapperByName(value);
             ParameterType paramType = parameterWrapper.getType();
             String actualValue = null;

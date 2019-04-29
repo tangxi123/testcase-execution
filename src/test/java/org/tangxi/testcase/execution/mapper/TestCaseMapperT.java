@@ -8,21 +8,21 @@ import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 
-public class TestCaseMapperTest {
+public class TestCaseMapperT {
     @Test
     public void selectTestCaseById() throws IOException{
         SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
         Assertion assertion = new Assertion();
         try{
-            TestCaseMapper mapper = sqlSession.getMapper(TestCaseMapper.class);
-            TestCase testCase= mapper.selectTestCaseById((long)139);
-            assertion.assertEquals(testCase.getId().toString(),"139");
+            TCaseMapper mapper = sqlSession.getMapper(TCaseMapper.class);
+            TestCase testCase= mapper.selectTestCaseById(139);
+            assertion.assertEquals(testCase.getId(),"139");
             assertion.assertEquals(testCase.getSuite(),"testcase");
             assertion.assertEquals(testCase.getTestModule(),"query");
-            assertion.assertEquals(testCase.getGroups().get(0),"功能测试");
+            assertion.assertEquals(testCase.getGroups(),"功能测试");
             assertion.assertEquals(testCase.getTestName(),"test");
             assertion.assertEquals(testCase.getDescs(),"GET接口请求测试");
             assertion.assertEquals(testCase.getMethod(),"GET");
@@ -45,5 +45,29 @@ public class TestCaseMapperTest {
             sqlSession.commit();
         }
 
+    }
+
+    @Test
+    public void getTestCasesByGroups(){
+        SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
+        try{
+            TCaseMapper mapper = sqlSession.getMapper(TCaseMapper.class);
+            List<TestCase> testCases = mapper.getTestCasesByGroups("新增parameter");
+            System.out.println(JacksonUtil.toJson(testCases));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getTestCasesBySuite(){
+        SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
+        try{
+            TCaseMapper mapper = sqlSession.getMapper(TCaseMapper.class);
+            List<TestCase> testCases = mapper.getTestCasesBySuite("testPlatform-api");
+            System.out.println(JacksonUtil.toJson(testCases));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -6,6 +6,13 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+    <typeAliases>
+        <typeAlias type="org.tangxi.testcase.execution.model.TestCase" alias="TestCase"/>
+        <typeAlias type="org.tangxi.testcase.execution.model.prePostAction.PrePostActionWrapper" alias="PrePostActionWrapper"/>
+        <typeAlias type="org.tangxi.testcase.execution.model.prePostAction.PrePostActionSql" alias="PrePostActionSql"/>
+        <typeAlias type="org.tangxi.testcase.execution.model.parameter.ParameterWrapper" alias="ParameterWrapper"/>
+        <typeAlias type="org.tangxi.testcase.execution.model.parameter.ParameterSql" alias="ParameterSql"/>
+    </typeAliases>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -18,8 +25,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/TestCaseMapper.xml"/>
-        <mapper resource="mapper/PrePostMapper.xml"/>
-        <mapper resource="mapper/ParameterMapper.xml"/>
+        <mapper resource="mapper/TCaseMapper.xml"/>
+        <mapper resource="mapper/PPostMapper.xml"/>
+        <mapper resource="mapper/PMapper.xml"/>
     </mappers>
 </configuration>

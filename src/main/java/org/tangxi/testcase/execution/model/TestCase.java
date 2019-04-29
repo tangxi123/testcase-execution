@@ -7,13 +7,13 @@ import java.util.List;
 
 public class TestCase {
 
-    private Long id;
+    private int id;
 
     private String suite;
 
     private String testModule;
 
-    private List<String> groups;
+    private String groups;
 
     private String testName;
 
@@ -43,11 +43,11 @@ public class TestCase {
 
 //    private TestStatus is_passed;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -67,11 +67,12 @@ public class TestCase {
         this.testModule = testModule;
     }
 
-    public List<String> getGroups() {
+    public String getGroups() {
         return groups;
     }
 
-    public void setGroups(List<String> groups) {
+
+    public void setGroups(String groups) {
         this.groups = groups;
     }
 

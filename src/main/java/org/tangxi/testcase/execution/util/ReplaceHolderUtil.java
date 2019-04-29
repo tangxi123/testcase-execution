@@ -1,14 +1,9 @@
 package org.tangxi.testcase.execution.util;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tangxi.testcase.execution.execution.ParameterExecution;
-import org.tangxi.testcase.execution.mapper.ParameterMapper;
-import org.tangxi.testcase.execution.model.parameter.ParameterSql;
-import org.tangxi.testcase.execution.model.parameter.ParameterType;
-import org.tangxi.testcase.execution.model.parameter.ParameterWrapper;
 
 import java.util.Map;
 import java.util.regex.Matcher;

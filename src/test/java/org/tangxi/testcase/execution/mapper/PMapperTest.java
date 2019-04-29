@@ -5,15 +5,13 @@ import org.tangxi.testcase.execution.model.parameter.ParameterWrapper;
 import org.tangxi.testcase.execution.util.SqlSessionFactoryUtil;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
-public class ParameterMapperTest {
+public class PMapperTest {
     @Test
     public void selectParameterWrapperByNameTest(){
         SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
         try{
-            ParameterMapper mapper = sqlSession.getMapper(ParameterMapper.class);
-            ParameterWrapper parameterWrapper = mapper.selectParameterWrapperByName("${testCaseId}");
+            PMapper mapper = sqlSession.getMapper(PMapper.class);
+            ParameterWrapper parameterWrapper = mapper.selectParameterWrapperByName("testCaseId");
             System.out.println(parameterWrapper.getId());
             System.out.println(parameterWrapper.getName());
             System.out.println(parameterWrapper.getDescs());

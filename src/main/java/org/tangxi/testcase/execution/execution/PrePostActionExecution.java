@@ -3,7 +3,7 @@ package org.tangxi.testcase.execution.execution;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tangxi.testcase.execution.mapper.PrePostMapper;
+import org.tangxi.testcase.execution.mapper.PPostMapper;
 import org.tangxi.testcase.execution.model.prePostAction.PrePostAction;
 import org.tangxi.testcase.execution.model.prePostAction.PrePostActionSql;
 import org.tangxi.testcase.execution.model.prePostAction.PrePostActionType;
@@ -13,10 +13,8 @@ import org.tangxi.testcase.execution.util.JacksonUtil;
 import org.tangxi.testcase.execution.util.SqlSessionFactoryUtil;
 
 import java.sql.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 /**
  * 执行前后置动作的类
@@ -39,7 +37,7 @@ public class PrePostActionExecution {
         }
         SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
         try {
-            PrePostMapper mapper = sqlSession.getMapper(PrePostMapper.class);
+            PPostMapper mapper = sqlSession.getMapper(PPostMapper.class);
             PrePostActionWrapper prePostActionWrapper = mapper.selectPrePostActionWrapperByName(actionName);
             PrePostActionType actionType = prePostActionWrapper.getActionType();
             PrePostAction action = prePostActionWrapper.getAction();

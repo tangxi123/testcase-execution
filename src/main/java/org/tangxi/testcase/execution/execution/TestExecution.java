@@ -4,10 +4,9 @@ import com.jayway.restassured.path.json.JsonPath;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tangxi.testcase.execution.mapper.TestCaseMapper;
+import org.tangxi.testcase.execution.mapper.TCaseMapper;
 import org.tangxi.testcase.execution.model.TestCase;
 import org.tangxi.testcase.execution.model.checkPoint.CheckPoint;
-import org.tangxi.testcase.execution.util.ReplaceHolderUtil;
 import org.tangxi.testcase.execution.util.SqlSessionFactoryUtil;
 
 import java.util.HashMap;
@@ -39,7 +38,7 @@ public class TestExecution {
     private void initTestData(int id) {
         SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
         try {
-            TestCaseMapper testCaseMapper = sqlSession.getMapper(TestCaseMapper.class);
+            TCaseMapper testCaseMapper = sqlSession.getMapper(TCaseMapper.class);
             testCase = testCaseMapper.selectTestCaseById(id);
             parameters = testCase.getParameters();
             preActions = testCase.getPreActions();

@@ -8,13 +8,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class PrePostMapperTest {
+public class PPostMapperTest {
     @Test
     public void selectPrePostActionWrapperByName() {
         String action = "插入一条数据测试";
         SqlSession sqlSession = SqlSessionFactoryUtil.initSqlSessionFactory().openSession();
         try{
-            PrePostMapper mapper = sqlSession.getMapper(PrePostMapper.class);
+            PPostMapper mapper = sqlSession.getMapper(PPostMapper.class);
             PrePostActionWrapper prePostActionWrapper = mapper.selectPrePostActionWrapperByName("插入一条数据测试");
             Assert.assertEquals(prePostActionWrapper.getId(),3);
             Assert.assertEquals(prePostActionWrapper.getName(),"插入一条数据测试");
